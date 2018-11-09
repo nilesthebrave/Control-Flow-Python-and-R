@@ -1,0 +1,76 @@
+---
+title: "Assignment 2--R"
+author: "Insert your name here"
+date: ""
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Control flow:  Airport statistics
+
+If your code uses any libraries, load them here.
+```{r}
+library(readr)
+```
+
+a. Download the data set `airport.csv`.  Read it into R and display the first few lines of data.
+
+```{r}
+airport = read_csv("airport.csv")
+head(airport)
+```
+
+This data set contains data on all 135 medium and large airports in the US in 1990.  
+
+(Dataset:  "US Airport Statistics," submitted by Larry Winner, University of Florida.   Dataset obtained from the Journal of Statistics Education (http://www.amstat.org/publications/jse). Accessed 3 June 2015. Used by permission of author.) 
+
+b. **Use control flow** to print a list of airports at which the number of scheduled departures was less than the number of departures performed.
+
+- The point of this assignment is to demonstrate your understanding of control flow, so please use control flow to solve this problem.
+
+```{r}
+numRows = dim(airport)[1]
+for(airport_index in 1:numRows) {
+  if(airport[airport_index, 3] < airport[airport_index, 4]){
+     print(as.character(airport[airport_index, 1]))
+  }
+}
+```
+
+
+
+c. **Use control flow** to find the average (mean) number of passengers on flights from all the airports in part b.
+
+- Your result should be 1 number:  The total number of passengers from all of the specified airports, divided by the total number of performed departures from all of the specified airports.
+
+- The point of this assignment is to demonstrate your understanding of control flow, so please use control flow to solve this problem.
+
+```{r}
+for(airport_index in 1:numRows) {
+  if(airport[airport_index, 3] < airport[airport_index, 4]){
+     for(airport_index in 1:numRows) {
+       passengers = sum(airport$Passengers)
+       departures = sum(airport$`Performed Departures`)
+      }
+  }
+}
+
+result = passengers/departures
+print(result)                        
+noPartialPeople = floor(result)      
+print(noPartialPeople)          
+```
+NOTE: I've displayed the exact value and the value rounded down to the nearest whole person. I feel like both are 'correct' in their own way, depending on the nature of the problem.
+      I'm including both in my assignment submission to demonstrate that I got the exact answer but am adding the rounded answer in case it was something I was supposed to catch.
+      
+      
+d.  Optional: 	If you know a more efficient way to do parts b and c in R, that's great!  Do that here and use the result to check your work.  (If you don't know a more efficient way, that's fine.  We'll discuss methods of writing efficient code later in the course.)
+```{r}
+
+```
+
+
+-	Submit your .Rmd file and knitted .pdf or .docx file (.pdf preferred) to GitHub.
